@@ -1,0 +1,69 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+:root {
+  --title: #707070;
+  --divider: #ebebeb;
+  --title-underline: #ebebeb;
+  --background: #f7f7f7;
+  --lotofacil: #7f3992;
+  --mega-sena: #01ac66;
+  --lotomania: #f79c31;
+  --label: #868686;
+  --bet-circles: #adc0c4;
+  --buttons: #27c383;
+  --pseudo-element: #b5c401;
+}
+
+.container {
+  height: 100vh;
+  width: 100%;
+}
+
+nav {
+  display: flex;
+  justify-content: space-around;
+  width: 100%;
+
+  font-family: "Arimo", sans-serif;
+  color: var(--title);
+  font-weight: 700;
+}
+nav h1 {
+  font-style: italic;
+  font-size: 2.7em;
+  position: relative;
+}
+nav h1::after {
+  position: absolute;
+  content: "";
+  height: .15em;
+  border-radius: 6px;
+  bottom: -4px;
+  margin: 0 auto;
+  left: 0;
+  right: 0;
+  width: 100%;
+  background: var(--pseudo-element);
+}
+nav a {
+  margin-left: 4em;
+  cursor: pointer;
+}   
+nav img {
+  width: 1em;
+  height: 1em;
+  fill: var(--title);
+  margin-left: 0.5em;
+  vertical-align: middle;
+}
+.navWrapper {
+  display: flex;
+  align-items: center;
+}
+
+hr {
+  background-color: var(--divider);
+}
