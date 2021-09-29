@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Arimo:ital,wght@0,400;0,500;1,700&display=swap"
+    rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+  <title>TGL</title>
+</head>
+
+<body>
+  <div class="container">
+    <nav>
+      <div class="navContent">
+        <h1>TGL</h1>
+        <a>Home</a>
+      </div>
+      <div class="navContent">
+        <a>Account</a>
+        <a>Log out
+          <img src="./assets/arrow-right-svgrepo-com.svg" />
+        </a>
+      </div>
+    </nav>
+    <hr />
+    <div id="betContainer">
+      <div id="betWrapper">
+        <div id="labelContainer">
+          <span><span>New bet</span> for mega-sena</span>
+          <h4>Choose a game</h4>
+          <div>
+            <button class="buttonGame" id="lotofacilButton">Lotofácil</button>
+            <button class="buttonGame" id="mega-senaButton">Mega-sena</button>
+            <button class="buttonGame" id="lotomaniaButton">Lotomania</button>
+          </div>
+          <h4>Fill your bet</h4>
+          <p>Fill your bet Mark as many numbers as you want up to a maximum of 50. Win by hitting 15, 16, 17, 18, 19,
+            20 or none of the 20 numbers drawn.</p>
+        </div>
+        <div id="betNumbers">
+          <div class="rowWrapper">
+            <button class="betNumber">01</button>
+            <button class="betNumber">02</button>
+            <button class="betNumber">03</button>
+            <button class="betNumber">01</button>
+            <button class="betNumber">02</button>
+            <button class="betNumber">03</button>
+            <button class="betNumber">01</button>
+            <button class="betNumber">02</button>
+            <button class="betNumber">03</button>
+          </div>
+          <div class="rowWrapper">
+            <button class="betNumber">01</button>
+            <button class="betNumber">02</button>
+            <button class="betNumber">03</button>
+            <button class="betNumber">01</button>
+            <button class="betNumber">02</button>
+            <button class="betNumber">03</button>
+            <button class="betNumber">01</button>
+            <button class="betNumber">02</button>
+            <button class="betNumber">03</button>
+          </div>
+          <div class="rowWrapper">
+            <button class="betNumber">01</button>
+            <button class="betNumber">02</button>
+            <button class="betNumber">03</button>
+            <button class="betNumber">01</button>
+            <button class="betNumber">02</button>
+            <button class="betNumber">03</button>
+            <button class="betNumber">01</button>
+            <button class="betNumber">02</button>
+            <button class="betNumber">03</button>
+          </div>
+          <div class="rowWrapper">
+            <button class="betNumber">01</button>
+            <button class="betNumber">02</button>
+            <button class="betNumber">03</button>
+            <button class="betNumber">01</button>
+            <button class="betNumber">02</button>
+            <button class="betNumber">03</button>
+            <button class="betNumber">01</button>
+            <button class="betNumber">02</button>
+            <button class="betNumber">03</button>
+          </div>
+        </div>
+        <div id="confirmationWrapper">
+          <div id="gameManipulationWrapper">
+            <button class="gameButtons">Complete game</button>
+            <button class="gameButtons">Clear game</button>
+          </div>
+          <button id="addCart"><img src="./assets/shopping-cart-outline-svgrepo-com.svg">Add to
+            Cart</button>
+        </div>
+      </div>
+      <div id="betCart">
+        <h2>CART</h2>
+        <div id="gamesInCart">
+          <div id="game">
+            <img src="./assets/trash.svg" />
+            <div class="gameInnerContent">
+              <span>01, 02, 04, 05, 06, 07, 09, 15, 17, 20, 21, 22, 23, 24, 25</span>
+              <div>
+                <span class="gameName">Lotofácil</span>
+                <span>R$2,50</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <h2>CART <span>Total: R$2,50</span></h2>
+        <div id="saveCart">
+          <hr />
+          <div id="buttonSave">
+            <button>Save <img src="assets/green-arrow-right.svg" /></button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+  <script src="./index.js"></script>
+</body>
+
+</html>
