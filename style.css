@@ -86,8 +86,8 @@ hr {
 }
 
 #betContainer {
-  display: flex;
-  align-items: center;
+  display: grid;
+  grid-template-columns: 48rem 20rem;
   justify-content: center;
   margin-top: 3rem;
 }
@@ -101,23 +101,24 @@ hr {
   width: 45rem;
   margin-right: 2.5rem;
 }
-#betWrapper span {
-  color: var(--title);
-  text-transform: uppercase;
-  font-weight: 400;
-  font-size: 1.4rem;
-}
-
-#betWrapper span span {
-  font-weight: 700;
-  font-style: italic;
-}
 #betWrapper h4 {
   color: var(--label);
   font-weight: 700;
 }
 #betWrapper p {
   color: var(--label);
+}
+#titleBet {
+  color: var(--title);
+  font-size: 1.4rem;
+  text-transform: uppercase;
+}
+#titleBet #title {
+  font-style: italic;
+  font-weight: 700;
+}
+#titleBet #gameName {
+  font-weight: 400;
 }
 
 .buttonGame {
@@ -129,6 +130,7 @@ hr {
   font-style: italic;
   font-weight: 700;
   cursor: pointer;
+  transition: 0.5s;
 }
 #lotofacilButton {
   border: 2px solid var(--lotofacil);
@@ -143,7 +145,14 @@ hr {
   color: var(--lotomania);
 }
 #betNumbers {
+  display: grid;
+  grid-template-columns: 3.5rem 3.5rem 3.5rem 3.5rem 3.5rem 3.5rem 3.5rem 3.5rem 3.5rem;
+  column-gap: 1.6em;
+  row-gap: 1rem;
   margin-top: 2rem;
+  max-height: 20rem;
+  overflow: scroll;
+  overflow-x: hidden;
 }
 .betNumber {
   height: 3.5rem;
@@ -159,14 +168,10 @@ hr {
   font-family: "Arimo", sans-serif;
   font-weight: bold;
 }
-.rowWrapper {
-  display: flex;
-  justify-content: space-between;
-  margin-bottom: 1em;
-}
 #confirmationWrapper {
   display: flex;
   justify-content: space-between;
+  margin-top: 1rem;
 }
 #confirmationWrapper button {
   cursor: pointer;
@@ -178,6 +183,12 @@ hr {
   color: var(--buttons);
   padding: 1rem;
   font-size: 1em;
+  margin-right: 1rem;
+}
+.gameButtons:hover {
+  color: white !important;
+  background-color: var(--buttons);
+  transition: 0.4s;
 }
 
 #confirmationWrapper img {
@@ -238,15 +249,16 @@ hr {
   overflow-x: hidden;
   max-height: 10rem;
 }
-#game {
+.game {
   display: flex;
   align-items: center;
   color: var(--label);
 }
-#game img {
-  height: 1.5rem;
-  width: 1rem;
+.game img {
+  height: 1.6rem;
+  width: 1.3rem;
   margin-right: 0.5rem;
+  cursor: pointer;
 }
 .gameInnerContent {
   display: flex;
