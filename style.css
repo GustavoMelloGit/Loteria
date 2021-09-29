@@ -2,6 +2,7 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  font-family: "Arimo", sans-serif;
 }
 :root {
   --title: #707070;
@@ -17,8 +18,24 @@
   --pseudo-element: #b5c401;
 }
 
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-thumb {
+  background: #707070;
+  border-radius: 8px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #b3afb3;
+}
+::-webkit-scrollbar-track {
+  background: #fff;
+  border-radius: 0px;
+  box-shadow: inset 0px 0px 0px 0px #f0f0f0;
+}
 .container {
-  height: 100vh;
+  max-height: 100vh;
   width: 100%;
 }
 
@@ -26,20 +43,20 @@ nav {
   display: flex;
   justify-content: space-around;
   width: 100%;
+  padding-top: 1em;
 
-  font-family: "Arimo", sans-serif;
   color: var(--title);
   font-weight: 700;
+  font-style: italic;
 }
 nav h1 {
-  font-style: italic;
   font-size: 2.7em;
   position: relative;
 }
 nav h1::after {
   position: absolute;
   content: "";
-  height: .15em;
+  height: 0.15em;
   border-radius: 6px;
   bottom: -4px;
   margin: 0 auto;
@@ -51,7 +68,7 @@ nav h1::after {
 nav a {
   margin-left: 4em;
   cursor: pointer;
-}   
+}
 nav img {
   width: 1em;
   height: 1em;
@@ -59,11 +76,189 @@ nav img {
   margin-left: 0.5em;
   vertical-align: middle;
 }
-.navWrapper {
+.navContent {
   display: flex;
   align-items: center;
 }
 
 hr {
-  background-color: var(--divider);
+  border-color: var(--divider);
+}
+
+#betContainer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 3rem;
+}
+#labelContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 13rem;
+}
+#betWrapper {
+  width: 45rem;
+  margin-right: 2.5rem;
+}
+#betWrapper span {
+  color: var(--title);
+  text-transform: uppercase;
+  font-weight: 400;
+  font-size: 1.4rem;
+}
+
+#betWrapper span span {
+  font-weight: 700;
+  font-style: italic;
+}
+#betWrapper h4 {
+  color: var(--label);
+  font-weight: 700;
+}
+#betWrapper p {
+  color: var(--label);
+}
+
+.buttonGame {
+  border-radius: 100px;
+  outline: none;
+  width: 8em;
+  padding: 0.3em 0 0.3em 0;
+  font-family: "Arimo", sans-serif;
+  font-style: italic;
+  font-weight: 700;
+  cursor: pointer;
+}
+#lotofacilButton {
+  border: 2px solid var(--lotofacil);
+  color: var(--lotofacil);
+}
+#mega-senaButton {
+  border: 2px solid var(--mega-sena);
+  color: var(--mega-sena);
+}
+#lotomaniaButton {
+  border: 2px solid var(--lotomania);
+  color: var(--lotomania);
+}
+#betNumbers {
+  margin-top: 2rem;
+}
+.betNumber {
+  height: 3.5rem;
+  width: 3.5rem;
+
+  background-color: var(--bet-circles);
+  border-radius: 50%;
+  border: none;
+  cursor: pointer;
+
+  text-align: center;
+  color: white;
+  font-family: "Arimo", sans-serif;
+  font-weight: bold;
+}
+.rowWrapper {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 1em;
+}
+#confirmationWrapper {
+  display: flex;
+  justify-content: space-between;
+}
+#confirmationWrapper button {
+  cursor: pointer;
+  border-radius: 10px;
+}
+#confirmationWrapper .gameButtons {
+  border: thin solid var(--buttons);
+  font-family: "Arimo", sans-serif;
+  color: var(--buttons);
+  padding: 1rem;
+  font-size: 1em;
+}
+
+#confirmationWrapper img {
+  height: 1em;
+  width: 1em;
+}
+#addCart {
+  display: flex;
+  color: white;
+  background-color: var(--buttons);
+  border: none;
+  padding: 1rem 3rem 1rem 3rem;
+  font-size: 1em;
+}
+
+#betCart {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+
+  padding: 1.5rem;
+  height: 27rem;
+  width: 20rem;
+  border: thin solid #e2e2e2;
+  border-radius: 10px;
+}
+#betCart h2 {
+  color: var(--title);
+  text-transform: uppercase;
+  font-style: italic;
+}
+#betCart h2 span {
+  color: var(--label);
+  font-style: normal;
+  font-weight: 300;
+}
+#saveCart hr {
+  border: thin solid #e2e2e2;
+  margin-bottom: 1rem;
+}
+#buttonSave {
+  text-align: center;
+}
+#betCart button {
+  color: var(--buttons);
+  font-style: italic;
+  font-size: 2rem;
+  border: none;
+  cursor: pointer;
+}
+#betCart button img {
+  height: 1.5rem;
+  width: 1.5rem;
+  fill: var(--buttons);
+}
+#gamesInCart {
+  overflow: scroll;
+  overflow-x: hidden;
+  max-height: 10rem;
+}
+#game {
+  display: flex;
+  align-items: center;
+  color: var(--label);
+}
+#game img {
+  height: 1.5rem;
+  width: 1rem;
+  margin-right: 0.5rem;
+}
+.gameInnerContent {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  border-left: 3px solid var(--lotofacil);
+  border-radius: 4px;
+  height: 5rem;
+  padding: 0.5rem;
+}
+.gameName {
+  color: var(--lotofacil);
+  font-weight: bold;
+  font-style: italic;
 }
