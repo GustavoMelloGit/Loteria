@@ -15,6 +15,8 @@
         const gamesInCart = document.querySelector('[data-js="gamesInCart"]');
         const totalPrice = document.querySelector('[data-js="totalPrice"]');
         const completeGame = document.querySelector('[data-js="completeGame"]');
+        const clearGame = document.querySelector('[data-js="clearGame"]');
+
         let gameSelected;
         let numbersSelected = [];
         let totalPriceCount = 0;
@@ -169,6 +171,7 @@
         }
 
         function handleCompleteGame() {
+            handleClearGame();
             for (let i = 0; i < getSelectedGameMax(); i++) {
                 if (gameSelected !== getSelectedGameMax) {
                     const random = randomNumber(1, getSelectedGameRange())
@@ -180,12 +183,20 @@
             }
             handleAddToCart();
         }
+        function handleClearGame() {
+            numbersSelected = [];
+            const numbers = document.querySelectorAll('.betNumber');
+            for (let i = 0; i < numbers.length; i++) {
+                numbers[i].style.backgroundColor = "#adc0c4";
+            }
+        }
 
         function handleDeleteGame(deletedGame, price) {
             deletedGame.remove();
             totalPriceCount -= price;
             totalPrice.textContent = calculateTotalPrice();
         }
+
         function handleAddToCart() {
             const trashCan = document.createElement('img');
             trashCan.src = '../assets/trash.svg';
@@ -230,7 +241,7 @@
                     `Preencha corretamente os campos`
                 );
             }
-            numbersSelected = [];
+            handleClearGame();
         }
 
         function eventListeners(index) {
@@ -260,8 +271,13 @@
         completeGame.addEventListener('click', () => {
             handleCompleteGame();
         })
-
-        lotofacil.click();
+        clearGame.addEventListener('click', () => {
+            handleClearGame();
+        })
+        document.addEventListener('DOMContentLoaded', () => {
+            lotofacil.click();
+            createBetButtons(25);
+        })
     }
     app();
 })();
