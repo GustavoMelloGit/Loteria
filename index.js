@@ -1,7 +1,0 @@
-(function () {
-    function app() {
-
-    }
-
-    app();
-})();
