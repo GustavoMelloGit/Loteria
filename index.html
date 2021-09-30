@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Arimo:ital,wght@0,400;0,500;1,700&display=swap"
+    rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+  <title>TGL</title>
+</head>
+
+<body>
+  <div class="container">
+    <nav>
+      <div class="navContent">
+        <h1>TGL</h1>
+        <a>Home</a>
+      </div>
+      <div class="navContent">
+        <a>Account</a>
+        <a>Log out
+          <img src="./assets/arrow-right-svgrepo-com.svg" />
+        </a>
+      </div>
+    </nav>
+    <hr />
+    <div id="betContainer">
+      <div id="betWrapper">
+        <div id="labelContainer">
+          <div id="titleBet">
+            <span id="title">New bet</span>
+            <span id="gameName" data-js="betGameName"></span>
+          </div>
+          <h4>Choose a game</h4>
+          <div data-js="gamesOptionsWrapper"></div>
+          <h4>Fill your bet</h4>
+          <p data-js="gameDescription">.</p>
+        </div>
+        <div id="betNumbers"></div>
+        <div id="confirmationWrapper">
+          <div id="gameManipulationWrapper">
+            <button class="gameButtons" data-js="completeGame">Complete game</button>
+            <button class="gameButtons" data-js="clearGame">Clear game</button>
+          </div>
+          <button id="addCart" data-js="addToCart"><img src="./assets/shopping-cart-outline-svgrepo-com.svg">Add to
+            Cart</button>
+        </div>
+      </div>
+      <div id="betCart">
+        <h2>CART</h2>
+        <div id="gamesInCart" data-js="gamesInCart"></div>
+        <h2>CART <span data-js="totalPrice">Total: R$ 0,00</span></h2>
+        <div id="saveCart">
+          <hr />
+          <div id="buttonSave">
+            <button>Save <img src="assets/green-arrow-right.svg" /></button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+  </div>
+  <script src="./scripts/index.js"></script>
+</body>
+
+</html>

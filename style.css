@@ -1,0 +1,288 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Arimo", sans-serif;
+}
+:root {
+  --title: #707070;
+  --divider: #ebebeb;
+  --title-underline: #ebebeb;
+  --background: #f7f7f7;
+  --lotofacil: #7f3992;
+  --mega-sena: #01ac66;
+  --lotomania: #f79c31;
+  --label: #868686;
+  --bet-circles: #adc0c4;
+  --buttons: #27c383;
+  --pseudo-element: #b5c401;
+}
+
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-thumb {
+  background: #707070;
+  border-radius: 8px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #b3afb3;
+}
+::-webkit-scrollbar-track {
+  background: #fff;
+  border-radius: 0px;
+  box-shadow: inset 0px 0px 0px 0px #f0f0f0;
+}
+.container {
+  max-height: 100vh;
+  width: 100%;
+}
+
+nav {
+  display: flex;
+  justify-content: space-around;
+  width: 100%;
+  padding-top: 1em;
+
+  color: var(--title);
+  font-weight: 700;
+  font-style: italic;
+}
+nav h1 {
+  font-size: 2.7em;
+  position: relative;
+}
+nav h1::after {
+  position: absolute;
+  content: "";
+  height: 0.15em;
+  border-radius: 6px;
+  bottom: -4px;
+  margin: 0 auto;
+  left: 0;
+  right: 0;
+  width: 100%;
+  background: var(--pseudo-element);
+}
+nav a {
+  margin-left: 4em;
+  cursor: pointer;
+}
+nav img {
+  width: 1em;
+  height: 1em;
+  fill: var(--title);
+  margin-left: 0.5em;
+  vertical-align: middle;
+}
+.navContent {
+  display: flex;
+  align-items: center;
+}
+
+hr {
+  border-color: var(--divider);
+}
+
+#betContainer {
+  display: grid;
+  grid-template-columns: 48rem 20rem;
+  justify-content: center;
+  margin-top: 3rem;
+}
+#labelContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 13rem;
+}
+#betWrapper {
+  width: 45rem;
+  margin-right: 2.5rem;
+}
+#betWrapper h4 {
+  color: var(--label);
+  font-weight: 700;
+}
+#betWrapper p {
+  color: var(--label);
+}
+#titleBet {
+  color: var(--title);
+  font-size: 1.4rem;
+  text-transform: uppercase;
+}
+#titleBet #title {
+  font-style: italic;
+  font-weight: 700;
+}
+#titleBet #gameName {
+  font-weight: 400;
+}
+
+.buttonGame {
+  border-radius: 100px;
+  outline: none;
+  width: 8em;
+  padding: 0.3em 0 0.3em 0;
+  font-family: "Arimo", sans-serif;
+  font-style: italic;
+  font-weight: 700;
+  cursor: pointer;
+  transition: 0.5s;
+}
+#lotofacilButton {
+  border: 2px solid var(--lotofacil);
+  color: var(--lotofacil);
+}
+#mega-senaButton {
+  border: 2px solid var(--mega-sena);
+  color: var(--mega-sena);
+}
+#lotomaniaButton {
+  border: 2px solid var(--lotomania);
+  color: var(--lotomania);
+}
+#betNumbers {
+  display: grid;
+  grid-template-columns: 3.5rem 3.5rem 3.5rem 3.5rem 3.5rem 3.5rem 3.5rem 3.5rem 3.5rem;
+  column-gap: 1.6em;
+  row-gap: 1rem;
+  margin-top: 2rem;
+  max-height: 20rem;
+  overflow: scroll;
+  overflow-x: hidden;
+}
+.betNumber {
+  height: 3.5rem;
+  width: 3.5rem;
+
+  background-color: var(--bet-circles);
+  border-radius: 50%;
+  border: none;
+  cursor: pointer;
+
+  text-align: center;
+  color: white;
+  font-family: "Arimo", sans-serif;
+  font-weight: bold;
+}
+#confirmationWrapper {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 1rem;
+}
+#confirmationWrapper button {
+  cursor: pointer;
+  border-radius: 10px;
+}
+#confirmationWrapper .gameButtons {
+  border: thin solid var(--buttons);
+  font-family: "Arimo", sans-serif;
+  color: var(--buttons);
+  padding: 1rem;
+  font-size: 1em;
+  margin-right: 1rem;
+}
+.gameButtons:hover {
+  color: white !important;
+  background-color: var(--buttons);
+  transition: 0.4s;
+}
+
+#confirmationWrapper img {
+  height: 1em;
+  width: 1em;
+}
+#addCart {
+  display: flex;
+  color: white;
+  background-color: var(--buttons);
+  border: none;
+  padding: 1rem 3rem 1rem 3rem;
+  font-size: 1em;
+}
+
+#betCart {
+  padding: 1.5rem;
+  height: 27rem;
+  width: 20rem;
+  border: thin solid #e2e2e2;
+  border-radius: 10px;
+}
+#betCart h2 {
+  color: var(--title);
+  text-transform: uppercase;
+  font-style: italic;
+}
+#betCart h2 span {
+  color: var(--label);
+  font-style: normal;
+  font-weight: 300;
+}
+#saveCart hr {
+  border: thin solid #e2e2e2;
+  margin-bottom: 1rem;
+  margin-top: 1rem;
+}
+#buttonSave {
+  text-align: center;
+}
+#betCart button {
+  color: var(--buttons);
+  font-style: italic;
+  font-size: 2rem;
+  border: none;
+  cursor: pointer;
+}
+#betCart button img {
+  height: 1.5rem;
+  width: 1.5rem;
+  fill: var(--buttons);
+}
+#gamesInCart {
+  overflow-y: scroll;
+  min-height: 13rem;
+  max-height: 13rem;
+  margin: 1rem 0 1rem 0;
+}
+#gamesInCart #noItensInCart {
+  text-align: center;
+  color: var(--label);
+}
+.game {
+  display: flex;
+  align-items: center;
+  color: var(--label);
+}
+.game img {
+  height: 1.6rem;
+  width: 1.2rem;
+  margin-right: 0.5rem;
+  cursor: pointer;
+}
+.gameInnerContent {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+
+  border-left: 3px solid var(--lotofacil);
+  border-radius: 4px;
+
+  word-break: break-all;
+  overflow-wrap: break-word;
+  -ms-hyphens: auto;
+  -moz-hyphens: auto;
+  -webkit-hyphens: auto;
+  hyphens: auto;
+
+  height: 5rem;
+  width: 100%;
+  padding: 0.5rem;
+  margin-bottom: 1rem;
+}
+.gameName {
+  font-weight: bold;
+  font-style: italic;
+}
