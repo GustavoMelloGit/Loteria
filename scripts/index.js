@@ -2,13 +2,13 @@
     "use strict";
     function app() {
         const ajax = new XMLHttpRequest();
+        let gamesOptions;
+        let games;
         let response;
-        const lotofacil = document.querySelector('[data-js="button-lotofacil"]');
-        const megaSena = document.querySelector('[data-js="button-mega-sena"]');
-        const lotomania = document.querySelector('[data-js="button-lotomania"]');
         const gameDescription = document.querySelector(
             '[data-js="gameDescription"]'
         );
+        const gamesOptionsWrapper = document.querySelector('[data-js="gamesOptionsWrapper"]');
         const gameName = document.querySelector('[data-js="betGameName"]');
         const betTable = document.querySelector("#betNumbers");
         const addToCart = document.querySelector('[data-js="addToCart"]');
@@ -16,6 +16,9 @@
         const totalPrice = document.querySelector('[data-js="totalPrice"]');
         const completeGame = document.querySelector('[data-js="completeGame"]');
         const clearGame = document.querySelector('[data-js="clearGame"]');
+        const noItensInCart = document.createElement('span');
+        noItensInCart.textContent = 'Cart is empty'
+        noItensInCart.setAttribute('id', 'noItensInCart');
 
         let gameSelected;
         let numbersSelected = [];
@@ -24,56 +27,55 @@
         function verifyStateAjax() {
             if (ajax.readyState === 4 && ajax.status === 200) {
                 response = JSON.parse(ajax.responseText);
+                gamesOptions = response.types;
+                addGamesOptions();
                 return true;
-            } else return false;
+            }
         }
-        function getDataFromJSON(index) {
+        async function getDataFromJSON() {
             try {
                 ajax.open("GET", "./games.json");
                 ajax.send();
-                ajax.addEventListener("readystatechange", () => {
-                    if (verifyStateAjax()) {
-                        gameDescription.textContent = response.types[index].description;
-                    }
-                });
+                ajax.addEventListener("readystatechange", verifyStateAjax);
             } catch (e) {
                 alert(e);
             }
         }
 
-        function resetButtonsSelected() {
-            if (response) {
-                lotofacil.style.backgroundColor = "white";
-                lotofacil.style.color = response.types[0].color;
-                megaSena.style.backgroundColor = "white";
-                megaSena.style.color = response.types[1].color;
-                lotomania.style.backgroundColor = "white";
-                lotomania.style.color = response.types[2].color;
+        function addGameInfo() {
+            gameDescription.textContent = response.types[gameSelected].description;
+            gameName.textContent = `for ${response.types[gameSelected].type}`;
+            gamesInCart.appendChild(noItensInCart);
+        }
+
+        function addGamesOptions() {
+            for (let i = 0; i < gamesOptions.length; i++) {
+                const gameButton = document.createElement("button");
+                gameButton.setAttribute('class', 'buttonGame');
+                gameButton.setAttribute('data-js', 'buttonGame');
+                gameButton.textContent = gamesOptions[i].type;
+                gameButton.style.border = `2px solid ${gamesOptions[i].color}`;
+                gameButton.style.color = gamesOptions[i].color;
+                gameButton.addEventListener('click', () => eventListeners(i))
+                gamesOptionsWrapper.appendChild(gameButton);
+            }
+            games = document.querySelectorAll('[data-js="buttonGame"]');
+            games[0].click();
+        }
+
+
+        function resetButtonsSelected(games) {
+            for (let i in gamesOptions) {
+                games[i].style.backgroundColor = "white";
+                games[i].style.color = gamesOptions[i].color;
             }
         }
 
-        function buttonSelected(index) {
-            switch (index) {
-                case 0:
-                    resetButtonsSelected();
-                    lotofacil.style.backgroundColor = "#7f3992";
-                    lotofacil.style.color = "white";
-                    gameName.textContent = "for lotofácil";
-                    break;
-                case 1:
-                    resetButtonsSelected();
-                    megaSena.style.backgroundColor = "#01ac66";
-                    megaSena.style.color = "white";
-                    gameName.textContent = "for Mega-sena";
-                    break;
-                case 2:
-                    resetButtonsSelected();
-                    lotomania.style.backgroundColor = "#f79c31";
-                    lotomania.style.color = "white";
-                    gameName.textContent = "for lotomania";
-                    break;
-            }
-            numbersSelected = [];
+        function buttonSelected() {
+            resetButtonsSelected(games);
+            games[gameSelected].style.backgroundColor = games[gameSelected].style.color;
+            games[gameSelected].style.color = "white";
+            handleClearGame();
         }
 
         function numberFormat(index) {
@@ -86,23 +88,16 @@
         }
 
         function handleNumberClicked(number) {
+            if (numbersSelected.length === getSelectedGameMax()) {
+                alert('Você já selecionou o número máximo de números');
+                return;
+            }
             if (numbersSelected.includes(number.value)) {
                 const index = numbersSelected.indexOf(number.value);
-
                 number.style.backgroundColor = "#adc0c4";
                 numbersSelected.splice(index, 1);
             } else {
-                switch (gameSelected) {
-                    case 0:
-                        number.style.backgroundColor = response.types[0].color;
-                        break;
-                    case 1:
-                        number.style.backgroundColor = response.types[1].color;
-                        break;
-                    case 2:
-                        number.style.backgroundColor = response.types[2].color;
-                        break;
-                }
+                number.style.backgroundColor = gamesOptions[gameSelected].color;
                 numbersSelected.push(number.value);
             }
         }
@@ -123,19 +118,12 @@
         }
 
         function verifyNumberOfSelected() {
-            if (response.types[gameSelected].max_number < numbersSelected.length || numbersSelected.length === 0) return false;
+            if (response.types[gameSelected].max_number !== numbersSelected.length) return false;
             else return true;
         }
 
         function returnGameName() {
-            switch (gameSelected) {
-                case 0:
-                    return response.types[0].type;
-                case 1:
-                    return response.types[1].type;
-                case 2:
-                    return response.types[2].type;
-            }
+            return gamesOptions[gameSelected].type;
         }
 
         function formatPrice(number) {
@@ -146,13 +134,13 @@
             number = formated.format(number);
             return ` ${number}`;
         }
+
         function calculateGamePrice() {
-            let gamePrice = response.types[gameSelected].price * numbersSelected.length;
-            totalPriceCount += response.types[gameSelected].price * numbersSelected.length;
-            return gamePrice;
+            return gamesOptions[gameSelected].price;
         }
 
         function calculateTotalPrice() {
+            totalPriceCount += response.types[gameSelected].price;
             return `Total: ${formatPrice(totalPriceCount)}`;
         }
 
@@ -170,19 +158,21 @@
             return response.types[gameSelected].color;
         }
 
+        function selectRandomNumbers() {
+            const numbers = document.querySelectorAll('.betNumber');
+            if (numbersSelected.length < getSelectedGameMax()) {
+                const random = randomNumber(1, getSelectedGameRange());
+                numbers[random - 1].click();
+                selectRandomNumbers();
+            }
+            else return;
+        }
+
         function handleCompleteGame() {
             handleClearGame();
-            for (let i = 0; i < getSelectedGameMax(); i++) {
-                if (gameSelected !== getSelectedGameMax) {
-                    const random = randomNumber(1, getSelectedGameRange())
-                    if (!numbersSelected.includes(random)) {
-                        numbersSelected.push(random);
-                    }
-                    else i--;
-                }
-            }
-            handleAddToCart();
+            selectRandomNumbers();
         }
+
         function handleClearGame() {
             numbersSelected = [];
             const numbers = document.querySelectorAll('.betNumber');
@@ -194,12 +184,14 @@
         function handleDeleteGame(deletedGame, price) {
             deletedGame.remove();
             totalPriceCount -= price;
-            totalPrice.textContent = calculateTotalPrice();
+            totalPrice.textContent = `Total: ${formatPrice(totalPriceCount)}`;
+            if (totalPriceCount === 0) gamesInCart.appendChild(noItensInCart);
         }
 
         function handleAddToCart() {
             const trashCan = document.createElement('img');
             trashCan.src = '../assets/trash.svg';
+            noItensInCart.remove();
 
             if (verifyNumberOfSelected()) {
                 const game = document.createElement('div');
@@ -246,24 +238,10 @@
 
         function eventListeners(index) {
             gameSelected = index;
-            getDataFromJSON(index);
             buttonSelected(index);
-            if (response) {
-                createBetButtons(response.types[index].range);
-            }
+            addGameInfo();
+            createBetButtons(response.types[index].range);
         }
-
-        lotofacil.addEventListener("click", () => {
-            eventListeners(0);
-        });
-
-        megaSena.addEventListener("click", () => {
-            eventListeners(1);
-        });
-
-        lotomania.addEventListener("click", () => {
-            eventListeners(2);
-        });
 
         addToCart.addEventListener("click", () => {
             handleAddToCart();
@@ -275,8 +253,7 @@
             handleClearGame();
         })
         document.addEventListener('DOMContentLoaded', () => {
-            lotofacil.click();
-            createBetButtons(25);
+            getDataFromJSON();
         })
     }
     app();

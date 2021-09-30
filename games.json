@@ -24,6 +24,14 @@
       "price": 2,
       "max_number": 5,
       "color": "#F79C31"
+    },
+    {
+      "type": "DuplaSena",
+      "description": "Escolha 5 números dos 20 disponíveis na quina. 5, 4, 3 ou 2 acertos. São seis sorteios semanais e seis chances de ganhar.",
+      "range": 20,
+      "price": 2,
+      "max_number": 5,
+      "color": "#4DF766"
     }
   ]
 }
