@@ -256,18 +256,21 @@ hr {
 }
 .game img {
   height: 1.6rem;
-  width: 1.3rem;
+  width: 1.2rem;
   margin-right: 0.5rem;
   cursor: pointer;
 }
 .gameInnerContent {
   display: flex;
   justify-content: center;
+
   flex-direction: column;
   border-left: 3px solid var(--lotofacil);
   border-radius: 4px;
+
   height: 5rem;
   padding: 0.5rem;
+  margin-bottom: 1rem;
 }
 .gameName {
   color: var(--lotofacil);
