@@ -14,6 +14,7 @@
         const addToCart = document.querySelector('[data-js="addToCart"]');
         const gamesInCart = document.querySelector('[data-js="gamesInCart"]');
         const totalPrice = document.querySelector('[data-js="totalPrice"]');
+        const completeGame = document.querySelector('[data-js="completeGame"]');
         let gameSelected;
         let numbersSelected = [];
         let totalPriceCount = 0;
@@ -81,7 +82,8 @@
         function cleanBetTable() {
             betTable.innerHTML = "";
         }
-        function numberClicked(number) {
+
+        function handleNumberClicked(number) {
             if (numbersSelected.includes(number.value)) {
                 const index = numbersSelected.indexOf(number.value);
 
@@ -112,7 +114,7 @@
                 numbers.textContent = numberFormat(i);
                 numbers.value = i;
 
-                numbers.addEventListener("click", () => numberClicked(numbers));
+                numbers.addEventListener("click", () => handleNumberClicked(numbers));
 
                 betTable.appendChild(numbers);
             }
@@ -152,12 +154,38 @@
             return `Total: ${formatPrice(totalPriceCount)}`;
         }
 
+        function randomNumber(min, max) {
+            return Math.floor(Math.random() * (max - min) + min);
+        }
+
+        function getSelectedGameRange() {
+            return response.types[gameSelected].range;
+        }
+        function getSelectedGameMax() {
+            return response.types[gameSelected].max_number;
+        }
+        function getSelectedGameColor() {
+            return response.types[gameSelected].color;
+        }
+
+        function handleCompleteGame() {
+            for (let i = 0; i < getSelectedGameMax(); i++) {
+                if (gameSelected !== getSelectedGameMax) {
+                    const random = randomNumber(1, getSelectedGameRange())
+                    if (!numbersSelected.includes(random)) {
+                        numbersSelected.push(random);
+                    }
+                    else i--;
+                }
+            }
+            handleAddToCart();
+        }
+
         function handleDeleteGame(deletedGame, price) {
             deletedGame.remove();
             totalPriceCount -= price;
-            totalPrice.textContent = formatPrice(totalPriceCount);
+            totalPrice.textContent = calculateTotalPrice();
         }
-
         function handleAddToCart() {
             const trashCan = document.createElement('img');
             trashCan.src = '../assets/trash.svg';
@@ -165,15 +193,18 @@
             if (verifyNumberOfSelected()) {
                 const game = document.createElement('div');
                 game.classList.add('game');
+                game.appendChild(trashCan);
 
                 const gameInnerContent = document.createElement('div');
                 gameInnerContent.classList.add('gameInnerContent');
+                gameInnerContent.style.borderLeft = `3px solid ${getSelectedGameColor()}`;
 
                 const gameNumbers = document.createElement('span');
                 const wrapper = document.createElement('div');
 
                 const gameName = document.createElement('span');
                 gameName.classList.add('gameName');
+                gameName.style.color = getSelectedGameColor();
 
                 const price = document.createElement('span');
                 const priceNumber = calculateGamePrice();
@@ -189,7 +220,6 @@
                 gameInnerContent.appendChild(gameNumbers);
                 gameInnerContent.appendChild(wrapper);
 
-                game.appendChild(trashCan);
                 game.appendChild(gameInnerContent);
 
                 gamesInCart.appendChild(game);
@@ -200,6 +230,7 @@
                     `Preencha corretamente os campos`
                 );
             }
+            numbersSelected = [];
         }
 
         function eventListeners(index) {
@@ -226,6 +257,9 @@
         addToCart.addEventListener("click", () => {
             handleAddToCart();
         });
+        completeGame.addEventListener('click', () => {
+            handleCompleteGame();
+        })
 
         lotofacil.click();
     }
