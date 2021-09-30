@@ -247,6 +247,10 @@ hr {
   max-height: 13rem;
   margin: 1rem 0 1rem 0;
 }
+#gamesInCart #noItensInCart {
+  text-align: center;
+  color: var(--label);
+}
 .game {
   display: flex;
   align-items: center;

@@ -16,6 +16,9 @@
         const totalPrice = document.querySelector('[data-js="totalPrice"]');
         const completeGame = document.querySelector('[data-js="completeGame"]');
         const clearGame = document.querySelector('[data-js="clearGame"]');
+        const noItensInCart = document.createElement('span');
+        noItensInCart.textContent = 'Cart is empty'
+        noItensInCart.setAttribute('id', 'noItensInCart');
 
         let gameSelected;
         let numbersSelected = [];
@@ -41,7 +44,8 @@
 
         function addGameInfo() {
             gameDescription.textContent = response.types[gameSelected].description;
-            gameName.textContent = `for ${response.types[gameSelected].type}`
+            gameName.textContent = `for ${response.types[gameSelected].type}`;
+            gamesInCart.appendChild(noItensInCart);
         }
 
         function addGamesOptions() {
@@ -84,6 +88,10 @@
         }
 
         function handleNumberClicked(number) {
+            if (numbersSelected.length === getSelectedGameMax()) {
+                alert('Você já selecionou o número máximo de números');
+                return;
+            }
             if (numbersSelected.includes(number.value)) {
                 const index = numbersSelected.indexOf(number.value);
                 number.style.backgroundColor = "#adc0c4";
@@ -110,7 +118,7 @@
         }
 
         function verifyNumberOfSelected() {
-            if (response.types[gameSelected].max_number < numbersSelected.length || numbersSelected.length === 0) return false;
+            if (response.types[gameSelected].max_number !== numbersSelected.length) return false;
             else return true;
         }
 
@@ -155,7 +163,6 @@
             if (numbersSelected.length < getSelectedGameMax()) {
                 const random = randomNumber(1, getSelectedGameRange());
                 numbers[random - 1].click();
-                console.log(numbersSelected);
                 selectRandomNumbers();
             }
             else return;
@@ -178,11 +185,13 @@
             deletedGame.remove();
             totalPriceCount -= price;
             totalPrice.textContent = `Total: ${formatPrice(totalPriceCount)}`;
+            if (totalPriceCount === 0) gamesInCart.appendChild(noItensInCart);
         }
 
         function handleAddToCart() {
             const trashCan = document.createElement('img');
             trashCan.src = '../assets/trash.svg';
+            noItensInCart.remove();
 
             if (verifyNumberOfSelected()) {
                 const game = document.createElement('div');
